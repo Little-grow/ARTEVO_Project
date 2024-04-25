@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PTmctY9rTMJJmnoLjLnzdSXtgTCIEOZSrDwli0G74jesNgEnr6kNBxYSlyGYTOEk1CJIOAlor0CJTiXXAS9iTg==",
+  "dgSpecHash": "A7R9ocvmT5etlmhqUIDMH411d1Xp/jHJrPSMW3q4xl/1NhRi+pZibSCYBj9nLpZYBVYFM67/s/hXRsRtEe7g7Q==",
   "success": true,
-  "projectFilePath": "E:\\art\\api\\api.csproj",
+  "projectFilePath": "E:\\ARTEVO\\api\\api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\shahd\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\shahd\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

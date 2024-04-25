@@ -4530,11 +4530,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\art\\api\\api.csproj",
+      "projectUniqueName": "E:\\ARTEVO\\api\\api.csproj",
       "projectName": "api",
-      "projectPath": "E:\\art\\api\\api.csproj",
+      "projectPath": "E:\\ARTEVO\\api\\api.csproj",
       "packagesPath": "C:\\Users\\shahd\\.nuget\\packages\\",
-      "outputPath": "E:\\art\\api\\obj\\",
+      "outputPath": "E:\\ARTEVO\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\shahd\\AppData\\Roaming\\NuGet\\NuGet.Config",
