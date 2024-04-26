@@ -1,0 +1,36 @@
+@import '../../Container';
+@import '../../GlobalVariables';
+
+.container {
+  @extend .container;
+}
+
+.newproject {
+  font-family: 'Inter', 'sans-serif';
+  padding: $sectionPadding 0;
+}
+
+.newproject__images__preview {
+  display: flex;
+  gap: 64px;
+  border: 2px solid #dddddd;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.newproject__images__preview__image {
+  display: flex;
+  flex-grow: 1;
+  max-height: 400px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.newproject__images__preview__image__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
