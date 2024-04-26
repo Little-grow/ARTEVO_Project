@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "api.Controllers.Users.ArtistsController",
+    "Method": "Register",
+    "RelativePath": "api/Artists",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "api.Models.Dto.Users.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "api.Controllers.Users.ArtistsController",
     "Method": "AllArtists",
     "RelativePath": "api/Artists/AllArtists",
     "HttpMethod": "GET",
@@ -63,9 +79,51 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "api.Controllers.Artworks.ArtworksController",
-    "Method": "GetFeaturedPieces",
-    "RelativePath": "api/Artworks/featuredPieces",
+    "ContainingType": "api.Controllers.Users.Auth.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "api.Models.Dto.Users.TokenRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "api.Controllers.Users.Auth.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/Auth/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "api.Models.Dto.Users.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "api.Controllers.Feature.FeaturedController",
+    "Method": "Artists",
+    "RelativePath": "api/Featured/Artists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "api.Controllers.Feature.FeaturedController",
+    "Method": "Pieces",
+    "RelativePath": "api/Featured/Pieces",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

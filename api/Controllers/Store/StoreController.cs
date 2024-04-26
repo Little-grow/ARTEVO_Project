@@ -16,11 +16,11 @@ namespace api.Controllers.Store
         }
 
         [HttpGet("store")]
-        public async Task<IActionResult> GetStore(int page, int pageSize = 3)
+        public async Task<IActionResult> GetStore(int Page, int PageSize = 3)
         {
             var products = await _context.PortoflioMedia
-                                 .Skip((page - 1) * pageSize)
-                                 .Take(pageSize)
+                                 .Skip((Page - 1) * PageSize)
+                                 .Take(PageSize)
                                  .Where(p => p.ForSale == true)
                                  .ToListAsync();
 

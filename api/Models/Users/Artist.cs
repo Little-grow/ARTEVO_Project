@@ -8,6 +8,9 @@ namespace api.Models.Users
     {
         public int Id { get; set; }
         public required string Name { get; set; } 
+
+        public required string UserName { get; set; }
+
         public Portoflio? Portoflio { get; set; }
         public string Bio { get;  set; } = "";
         public Uri? Facebook { get;  set; }
@@ -22,5 +25,9 @@ namespace api.Models.Users
         public int NumberOfFollowing { get; set; }
 
         public bool isVerified { get; set; }
+
+        public string Password { get; set; }
+
+        public string PasswordHash { get; set; }
     }
 }

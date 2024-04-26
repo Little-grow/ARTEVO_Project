@@ -23,9 +23,9 @@ namespace api.Controllers.Portoflios
 
         // Get Poject
         [HttpGet("GetFile")] 
-        public async Task<IActionResult> GetFile(int fileId)
+        public async Task<IActionResult> GetFile(int FileId)
         {
-            var file = await _context.PortoflioMedia.FirstOrDefaultAsync(f => f.Id == fileId);
+            var file = await _context.PortoflioMedia.FirstOrDefaultAsync(f => f.Id == FileId);
             if (file is null)
             {
                 return NotFound();
@@ -43,13 +43,13 @@ namespace api.Controllers.Portoflios
 
         // Post Poject 
         [HttpPost("PostFile")]
-        public async Task<IActionResult> PostFile(int artistId, MediaDto portoflioMedia)
+        public async Task<IActionResult> PostFile(int ArtistId, MediaDto portoflioMedia)
         {
 
             var artist = await _context.Artists
                     .Include(a => a.Portoflio)
                     //.ThenInclude(p => p.Files)
-                    .FirstOrDefaultAsync(a => a.Id == artistId);
+                    .FirstOrDefaultAsync(a => a.Id == ArtistId);
 
             if (artist is null)
             {
@@ -62,7 +62,7 @@ namespace api.Controllers.Portoflios
                 artist.Portoflio = new Portoflio {
                     Files = new List<PortoflioMedia>(), 
                     Artist = artist,
-                    ArtistId = artistId
+                    ArtistId = ArtistId
                 };
 
                 await _context.Portoflios.AddAsync(artist.Portoflio);
@@ -95,10 +95,10 @@ namespace api.Controllers.Portoflios
 
         // there is trick in the id here 
         [HttpPut("EditFile")]
-        public async Task<IActionResult> EditFile(int artistId,int fileId, MediaDto portoflioMedia)
+        public async Task<IActionResult> EditFile(int ArtistId,int FileId, MediaDto portoflioMedia)
         {
             var file = await _context.PortoflioMedia
-                .FirstOrDefaultAsync(f => f.Id == fileId);
+                .FirstOrDefaultAsync(f => f.Id == FileId);
 
             if (file is null)
             {
@@ -108,14 +108,14 @@ namespace api.Controllers.Portoflios
             _context.PortoflioMedia.Remove(file);
             await _context.SaveChangesAsync();
 
-            await PostFile(artistId, portoflioMedia);
+            await PostFile(ArtistId, portoflioMedia);
             return Ok(file); 
         }
 
         [HttpDelete("DeleteFile")]
-        public async Task<IActionResult> DeleteFile(int fileId)
+        public async Task<IActionResult> DeleteFile(int FileId)
         {
-            var file = await _context.PortoflioMedia.FirstOrDefaultAsync(f => f.Id == fileId);
+            var file = await _context.PortoflioMedia.FirstOrDefaultAsync(f => f.Id == FileId);
             if (file is null)
             {
                 return NotFound();
@@ -125,9 +125,9 @@ namespace api.Controllers.Portoflios
             return Accepted(); // 202 Accepted
         }
        
-        private async Task<string> SaveFile(IFormFile file)
+        private async Task<string> SaveFile(IFormFile File)
         {
-            if (!(file.Length > 0))
+            if (!(File.Length > 0))
                 return "";
 
             //Create the "Images" folder if it doesn't exist
@@ -139,12 +139,12 @@ namespace api.Controllers.Portoflios
             }
 
             //Combine paths with proper directory separator
-            var filePath = Path.Combine(imagesFolderPath, Path.GetRandomFileName() + Path.GetExtension(file.FileName));
+            var filePath = Path.Combine(imagesFolderPath, Path.GetRandomFileName() + Path.GetExtension(File.FileName));
 
             // Use a safer approach for file creation (avoid overwriting)
             using (var fileStream = new FileStream(filePath, FileMode.CreateNew))
             {
-                await file.CopyToAsync(fileStream);
+                await File.CopyToAsync(fileStream);
             }
 
             return filePath;

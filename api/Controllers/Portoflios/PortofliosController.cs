@@ -35,12 +35,12 @@ namespace api.Controllers.Portoflios
 
         // the most confusing function in linking with front end
         [HttpGet("portfolio")]
-        public async Task<IActionResult> GetPortfolio(int artistId)
+        public async Task<IActionResult> GetPortfolio(int ArtistId)
         {
             var artist = await _context.Artists
                     .Include(a => a.Portoflio)
                     .ThenInclude(p => p.Files)
-                    .FirstOrDefaultAsync(a => a.Id == artistId);
+                    .FirstOrDefaultAsync(a => a.Id == ArtistId);
 
             if (artist is null || artist.Portoflio is null)
             {
@@ -51,12 +51,12 @@ namespace api.Controllers.Portoflios
         }
 
         [HttpGet("forSale")]
-        public async Task<IActionResult> GetForSale(int artistId)
+        public async Task<IActionResult> GetForSale(int ArtistId)
         {
             var artist = await _context.Artists
                     .Include(a => a.Portoflio)
                     .ThenInclude(p => p.Files)
-                    .FirstOrDefaultAsync(a => a.Id == artistId);
+                    .FirstOrDefaultAsync(a => a.Id == ArtistId);
 
             if (artist is null || artist.Portoflio is null)
             {

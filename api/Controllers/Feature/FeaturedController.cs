@@ -24,6 +24,7 @@ namespace api.Controllers.Feature
             return Ok(artists);
         }
 
+        [HttpGet("Pieces")]
         public async Task<IActionResult> Pieces()
         {
             var pieces = await _context.PortoflioMedia.ToListAsync();

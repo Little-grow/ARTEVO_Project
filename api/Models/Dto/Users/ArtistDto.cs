@@ -15,5 +15,7 @@ namespace api.Models.Dto.Users
         public string Email { get; set; } = "";
         [Phone]
         public string PhoneNumber { get; set; } = "";
+
+        public required string UserName { get; set; } = "";
     }
 }

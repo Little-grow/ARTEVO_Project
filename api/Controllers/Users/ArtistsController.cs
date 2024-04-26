@@ -22,28 +22,12 @@ namespace api.Controllers.Users
             _context = context;
         }
 
-        // create account "registeration"
-        /* 
-         * Store basic information (name, bio, contact details) in database
-         * 
-         */
-
-
-        // login 
-
-
-        // view profile
-        /* 
-         * view bio and contact details
-         * view artworks
-        */
-
         [HttpGet("profile")]
-        public async Task<IActionResult> ViewProfile(int artistId)
+        public async Task<IActionResult> ViewProfile(int ArtistId)
         {
             var artist = await _context.Artists
                      //.Include(a => a.Portoflio)
-                     .FirstOrDefaultAsync(a => a.Id == artistId);
+                     .FirstOrDefaultAsync(a => a.Id == ArtistId);
 
             if (artist is null)
             {
@@ -54,10 +38,10 @@ namespace api.Controllers.Users
         }
 
         [HttpPut("profile")]
-        public async Task<IActionResult> EditProfile(int artistId, [FromBody] ArtistDto artistDto)
+        public async Task<IActionResult> EditProfile(int ArtistId, [FromBody] ArtistDto artistDto)
         {
             var artist = await _context.Artists
-                .FirstOrDefaultAsync(a => a.Id == artistId);
+                .FirstOrDefaultAsync(a => a.Id == ArtistId);
 
             if (artist is null)
             {
@@ -78,33 +62,33 @@ namespace api.Controllers.Users
         }
 
         // just for testing
-        [HttpPost("Artist")]
-        public async Task<IActionResult> AddArtist(ArtistDto artistDto)
-        {
-            var artist = new Artist
-            {
-                Bio = artistDto.Bio,
-                Email = artistDto.Email,
+        //[HttpPost("Artist")]
+        //public async Task<IActionResult> AddArtist(ArtistDto artistDto)
+        //{
+        //    var artist = new Artist
+        //    {
+        //        Bio = artistDto.Bio,
+        //        Email = artistDto.Email,
 
-                Facebook = artistDto.Facebook,
-                Name = artistDto.Name,
+        //        Facebook = artistDto.Facebook,
+        //        Name = artistDto.Name,
 
-                PhoneNumber = artistDto.PhoneNumber,
-                Twitter = artistDto.Twitter
-            };
+        //        UserName = artistDto.UserName,
 
-            _context.Artists.Add(artist);
-            await _context.SaveChangesAsync();
-            return Created();
-        }
+        //        PhoneNumber = artistDto.PhoneNumber,
+        //        Twitter = artistDto.Twitter
+        //    };
 
-        // just for testing 
+        //    _context.Artists.Add(artist);
+        //    await _context.SaveChangesAsync();
+        //    return Created();
+        //}
+
         [HttpGet("AllArtists")]
         public async Task<IActionResult> AllArtists()
         {
             var artists = await _context.Artists.ToListAsync();
             return artists is null ? NotFound() : Ok(artists);
         }
-        
     }
 }
