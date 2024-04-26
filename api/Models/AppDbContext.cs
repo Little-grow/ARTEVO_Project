@@ -1,4 +1,5 @@
-﻿using api.Models.Portoflios;
+﻿using api.Models.Carts;
+using api.Models.Portoflios;
 using api.Models.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,5 +18,6 @@ namespace api.Models
         //public DbSet<Media> Files { get; set; }
         public DbSet<PortoflioMedia> PortoflioMedia { get; set; }
         public DbSet<Portoflio> Portoflios { get; set; }
+        public DbSet<Cart> Carts { get; set; }
     }
 }

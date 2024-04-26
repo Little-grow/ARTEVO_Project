@@ -1,44 +1,12 @@
 [
   {
     "ContainingType": "api.Controllers.Users.ArtistsController",
-    "Method": "Register",
-    "RelativePath": "api/Artists",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userDto",
-        "Type": "api.Models.Dto.Users.RegisterDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "api.Controllers.Users.ArtistsController",
     "Method": "AllArtists",
     "RelativePath": "api/Artists/AllArtists",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "api.Controllers.Users.ArtistsController",
-    "Method": "AddArtist",
-    "RelativePath": "api/Artists/Artist",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "artistDto",
-        "Type": "api.Models.Dto.Users.ArtistDto",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {
@@ -50,7 +18,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "artistId",
+        "Name": "ArtistId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -66,7 +34,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "artistId",
+        "Name": "ArtistId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -111,6 +79,64 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "api.Controllers.Carts.CartsController",
+    "Method": "AddToCart",
+    "RelativePath": "api/Carts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ItemId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ArtistId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "CartId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "api.Controllers.Carts.CartsController",
+    "Method": "DeleteCart",
+    "RelativePath": "api/Carts/DeleteCart",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CartId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "api.Controllers.Carts.CartsController",
+    "Method": "Getcart",
+    "RelativePath": "api/Carts/Getcart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CartId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "api.Controllers.Feature.FeaturedController",
     "Method": "Artists",
     "RelativePath": "api/Featured/Artists",
@@ -139,7 +165,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "fileId",
+        "Name": "FileId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -155,12 +181,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "artistId",
+        "Name": "ArtistId",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "fileId",
+        "Name": "FileId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -201,7 +227,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "fileId",
+        "Name": "FileId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -227,7 +253,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "artistId",
+        "Name": "ArtistId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -268,7 +294,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "artistId",
+        "Name": "ArtistId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -284,7 +310,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "artistId",
+        "Name": "ArtistId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -300,12 +326,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "page",
+        "Name": "Page",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "pageSize",
+        "Name": "PageSize",
         "Type": "System.Int32",
         "IsRequired": false
       }

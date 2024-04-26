@@ -18,9 +18,9 @@ namespace api.Models.Portoflios
 
     public class PortoflioMedia: Media
     {
-        public Artist Artist { get; set; } 
+        public Artist? Artist { get; set; } 
 
-        public Portoflio Portoflio { get; set; }
+        public Portoflio? Portoflio { get; set; }
 
         public string Description { get; set; } = string.Empty;
 
@@ -29,5 +29,11 @@ namespace api.Models.Portoflios
         public bool ForSale { get; set; }
 
         public int Price { get; set; }
+
+        public int Year { get; set; }
+
+        public int Reviews { get; set; }
+
+        public int Stars { get; set; }
     }
 }
