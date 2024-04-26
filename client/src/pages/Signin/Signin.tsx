@@ -9,28 +9,50 @@ import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../../Context/UserContext';
 
 const Signin = () => {
-  const { users, setUuid, setUser } = useUsers();
+  const { setUser, setToken, users } = useUsers();
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
+    console.log(e);
     e.preventDefault();
-    let found = 0;
-    users.map((user) => {
-      if (user.email === e.target.email.value) {
-        if (user.password === e.target.password.value) {
-          localStorage.setItem('uuid', user.id);
-          setUuid(user.id);
-          setUser(user);
-          navigate('/');
-          found = 1;
-          return;
-        }
-      }
+
+    try {
+
+    
+    const res = await fetch('https://localhost:7244/api/Auth/Login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: e.target.email.value,
+        password: e.target.password.value,
+      }),
     });
-    if (found === 0) {
-      alert('Wrong credentials');
+  
+
+    const reader = res.body.getReader();
+    let token = '';
+    
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      token += new TextDecoder().decode(value);
     }
+
+    const user = users.find((user) => user.email === e.target.email.value.toLowerCase())
+
+    localStorage.setItem('token', token);
+    setToken(token);
+    setUser(user);
+    console.log(user);
+    navigate('/');
+    return;
+  } catch(e) {
+    console.log(e);
+    alert("Invalid Email or Password");
   }
+}
 
   const anotherPageHeader = {
     text: 'Sign up',

@@ -11,26 +11,26 @@ const ProfileData = ({ setEditProfile, searchedUser }) => {
     if (isFollowed) {
       updatedSearchedUser = {
         ...searchedUser,
-        followers: searchedUser.followers.filter(
+        followersArray: searchedUser.followersArray.filter(
           (follower) => follower !== user.id,
         ),
       };
 
       updatedCurrentUser = {
         ...user,
-        following: searchedUser.followers.filter(
+        followingArray: searchedUser.followingArray.filter(
           (following) => following !== searchedUser.id,
         ),
       };
     } else {
       updatedSearchedUser = {
         ...searchedUser,
-        followers: [...searchedUser.followers, user.id],
+        followersArray: [...searchedUser.followersArray, user.id],
       };
 
       updatedCurrentUser = {
         ...user,
-        following: [...user.following, searchedUser.id],
+        followingArray: [...user.followingArray, searchedUser.id],
       };
     }
 
@@ -48,9 +48,9 @@ const ProfileData = ({ setEditProfile, searchedUser }) => {
     setUser(updatedCurrentUser);
   }
 
-  const isFollowed = user.following.find(
+  const isFollowed = user.followingArray.find(
     (followedUser) => followedUser === searchedUser.id,
-  );
+  ) || false;
 
   return (
     <section className={styles.profileData}>
@@ -91,15 +91,15 @@ const ProfileData = ({ setEditProfile, searchedUser }) => {
       <div className={styles.profileData__text}>
         <h2>{searchedUser.name}</h2>
         <p className={styles.profileData__text__username}>
-          @{searchedUser.username}
+          @{searchedUser.userName}
         </p>
       </div>
       <div className={styles.profileData__followers}>
         <h4>
-          <span>{searchedUser.followers.length}</span> followers
+          <span>{searchedUser.followersArray.length}</span> followers
         </h4>
         <h4>
-          <span>{searchedUser.following.length}</span> following
+          <span>{searchedUser.followingArray.length}</span> following
         </h4>
       </div>
       {user.id !== searchedUser.id && (

@@ -52,7 +52,7 @@ function App() {
         />
         <Route
           path="/profile"
-          element={uuid ? <Profile /> : <Navigate to="/signin" />}
+          element={user ? <Profile search={false} /> : <Navigate to="/signin" />}
         />
         <Route
           path="/artist/:profileId"

@@ -76,7 +76,7 @@ const Search = () => {
               : category === 'artists' &&
                 users.map((artist) => {
                   if (
-                    artist.username
+                    artist.userName
                       .toLowerCase()
                       .includes(search.toLowerCase()) ||
                     artist.name.toLowerCase().includes(search.toLowerCase())

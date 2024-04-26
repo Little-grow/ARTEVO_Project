@@ -1,8 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import imageDefault from '../../public/images/profile/profile.png';
-import image1 from '../../public/images/featured_artists/1.png';
-import image2 from '../../public/images/featured_artists/2.png';
-import image3 from '../../public/images/featured_artists/3.png';
+
 import imageOne from '../../public/images/product/1.png';
 import imageTwo from '../../public/images/product/2.png';
 import imageThree from '../../public/images/product/3.png';
@@ -10,88 +8,12 @@ import imageThree from '../../public/images/product/3.png';
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [uuid, setUuid] = useState(localStorage.getItem('uuid'));
+  const [token, setToken] = useState(null);
   const [cart, setCart] = useState([]);
   const [favourites, setFavourits] = useState([]);
   const [user, setUser] = useState(null);
-  const [isloading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      uuid: '1465asd6',
-      name: 'Amr Shoukry',
-      username: 'amr',
-      email: 'amr@gmail.com',
-      password: '123',
-      image: imageDefault,
-      followers: [],
-      following: [],
-      products: {
-        forSale: [],
-        portfolio: [],
-      },
-    },
-    {
-      id: 2,
-      uuid: '1789',
-      name: 'Nour',
-      username: 'nour',
-      email: 'amr2@gmail.com',
-      password: '123',
-      image: imageDefault,
-      followers: [],
-      following: [],
-      products: {
-        forSale: [],
-        portfolio: [],
-      },
-    },
-    {
-      id: 3,
-      uuid: '1s789',
-      name: 'Tarek',
-      username: 'tarek',
-      email: 'tarek@gmail.com',
-      password: '123',
-      image: image1,
-      followers: [],
-      following: [],
-      products: {
-        forSale: [],
-        portfolio: [],
-      },
-    },
-    {
-      id: 4,
-      uuid: '1b789',
-      name: 'Nadia',
-      username: 'nadia',
-      email: 'nadia@gmail.com',
-      password: '123',
-      image: image2,
-      followers: [],
-      following: [],
-      products: {
-        forSale: [],
-        portfolio: [],
-      },
-    },
-    {
-      id: 5,
-      uuid: '1m789',
-      name: 'Layla',
-      username: 'layla',
-      email: 'layla@gmail.com',
-      password: '123',
-      image: image3,
-      followers: [],
-      following: [],
-      products: {
-        forSale: [],
-        portfolio: [],
-      },
-    },
-  ]);
+  const [isloading, setIsLoading] = useState(false);
+  const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([
     {
       productId: 1,
@@ -181,25 +103,35 @@ const UserProvider = ({ children }) => {
   ]);
 
   useEffect(() => {
-    if (!user) {
-      const currentUser = users.find(
-        (existinguser) => existinguser.uuid === uuid,
-      );
-      if (!currentUser) {
-        setUuid('');
-      } else {
-        setUser(currentUser);
+    async function fetchData() {
+      try {
+        const res1 = await fetch('https://localhost:7244/api/Artists/AllArtists');
+        const data1 = await res1.json();
+        const users = data1.$values;
+        setUsers(users);
+      } catch(e) {
+        console.log(e);
       }
     }
-    setIsLoading(false);
-  }, [uuid, user]);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('token', '');
+    setToken('');
+  }, [])
+
+
+  // useEffect(() => {
+  //   const user = await fetch('https://localhost:7244/api/Auth/Login', {
+  //     body: JSON.stringify(data)
+  //   });
+  // }, []);
 
   return (
     <UserContext.Provider
       value={{
         users,
-        uuid,
-        setUuid,
         setUsers,
         cart,
         setCart,
@@ -209,6 +141,8 @@ const UserProvider = ({ children }) => {
         setUser,
         products,
         setProducts,
+        token,
+        setToken,
       }}>
       {isloading ? (
         <div

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import defaultImage from '../../../public/images/profile/profile.png';
 
-const Signup = ({ renderTime }) => {
+const Signup = () => {
   const passwordToggle = {
     toggleIcon2: (
       <svg
@@ -72,10 +72,10 @@ const Signup = ({ renderTime }) => {
     nav: 'signin',
   };
 
-  const { users, setUuid, setUsers, setUser } = useUsers();
+  const { users, setUsers, setUser, setToken } = useUsers();
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     let exist = false;
     users.map((user) => {
@@ -84,19 +84,52 @@ const Signup = ({ renderTime }) => {
       }
     });
     if (!exist) {
-      const newUser = {
-        id: uuidv4(),
-        email: e.target.email.value,
-        password: e.target.password.value,
-        image: image === null ? defaultImage : image,
+      try {
+        const res = await fetch('https://localhost:7244/api/Auth/Register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: e.target.email.value.toLowerCase(),
+            password: e.target.password.value,
+            userName: e.target.username.value,
+          }),
+        });
+
+        const reader = res.body.getReader();
+        let token = '';
+        
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          token += new TextDecoder().decode(value);
+        }
+         const newUser = {
+          id: uuidv4(),
+          token: token,
+          email: e.target.email.value,
+          password: e.target.password.value,
+          image: image === null ? defaultImage : image,
+          followers: [],
+          following: [],
+          products: {
+            forSale: [],
+            portfolio: []
+          }
       };
+
+      setToken(token);
+      localStorage.setItem('token', token);
       setUsers((users) => [...users, newUser]);
-      localStorage.setItem('uuid', newUser.id);
-      setUuid(newUser.id);
       setUser(newUser);
       navigate('/');
+      } catch(e) {
+        console.log(e);
+        alert("Complete your data");
+      }
     } else {
-      console.log('444');
+      alert('User already exists');
     }
   }
 

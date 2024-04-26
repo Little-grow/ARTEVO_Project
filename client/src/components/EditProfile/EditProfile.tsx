@@ -96,8 +96,8 @@ const EditProfile = ({ setEditProfile }) => {
             inputLabel="Username"
             label="Username"
             inputType="text"
-            name="username"
-            value={user.username}
+            name="userName"
+            value={user.userName}
           />
           <Input
             inputLabel="Email"

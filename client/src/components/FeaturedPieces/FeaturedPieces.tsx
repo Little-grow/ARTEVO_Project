@@ -1,7 +1,7 @@
 import Slider from '../Slider/Slider';
 import styles from './FeaturedPieces.module.css';
 
-const FeaturedPieces = ({ renderTime }) => {
+const FeaturedPieces = () => {
   return (
     <section className={styles.featuredPieces}>
       <div className={styles.container}>

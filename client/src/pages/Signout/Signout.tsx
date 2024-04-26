@@ -4,11 +4,11 @@ import { useUsers } from '../../Context/UserContext';
 
 const Signout = () => {
   const navigate = useNavigate();
-  const { setUser, setUuid } = useUsers();
+  const { setUser, setToken } = useUsers();
 
   useEffect(() => {
-    localStorage.setItem('uuid', '');
-    setUuid('');
+    localStorage.setItem('token', '');
+    setToken('')
     setUser(null);
     navigate('/signin');
   }, []);

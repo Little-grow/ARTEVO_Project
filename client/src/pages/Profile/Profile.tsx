@@ -12,7 +12,7 @@ const Profile = ({ search }) => {
   const { profileId } = useParams();
   const navigate = useNavigate();
 
-  const { users, user, uuid, setUser } = useUsers();
+  const { users, user, setUser } = useUsers();
 
   const searchedUser = search
     ? users.find((existing) => existing.id === Number(profileId))
@@ -35,6 +35,9 @@ const Profile = ({ search }) => {
         replace: true,
       });
     }
+
+    console.log(searchedUser)
+    users.map((existing) => console.log(existing));
   }, []);
 
   return (

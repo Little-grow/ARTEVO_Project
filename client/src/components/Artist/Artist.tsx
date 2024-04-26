@@ -8,7 +8,7 @@ const Artist = ({ artist }) => {
         <img src={artist.image} alt="" className={styles.artist__image__img} />
       </div>
       <h2>{artist.name}</h2>
-      <p>@{artist.username}</p>
+      <p>@{artist.userName}</p>
     </Link>
   );
 };
