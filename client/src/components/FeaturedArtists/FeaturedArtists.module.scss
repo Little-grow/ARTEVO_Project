@@ -32,6 +32,9 @@
   border: 1px solid #dddddd;
   flex: 1;
   padding-right: 16px;
+  img {
+    height: 80px;
+  }
 }
 
 .artists__artist__name {
@@ -45,3 +48,4 @@
     font-style: italic;
   }
 }
+

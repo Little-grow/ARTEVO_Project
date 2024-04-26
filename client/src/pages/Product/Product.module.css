@@ -76,6 +76,18 @@
      object-fit: cover;
 }
 
+.view {
+  background-color: #333333;
+  border: none;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  color: white;
+  text-align: center;
+}
+
 .product__imageDiv__images__preview {
   display: flex;
   flex-direction: column;

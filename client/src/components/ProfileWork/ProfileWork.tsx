@@ -1,127 +1,82 @@
 import styles from './ProfileWork.module.css';
-import portfolioImage from '../../../public/images/profile/portfolio.png';
 
-import imageOne from '../../../public/images/product/1.png';
-import imageTwo from '../../../public/images/product/2.png';
-import imageThree from '../../../public/images/product/3.png';
+import { Art } from '../Slider/Slider';
+import { useState } from 'react';
+import { useUsers } from '../../Context/UserContext';
+import { Link } from 'react-router-dom';
 
-const ProfileWork = () => {
-  const data = [
-    { img: portfolioImage, title: 'Scented candles' },
-    { img: portfolioImage, title: 'Scented candles' },
-    { img: portfolioImage, title: 'Scented candles' },
-    { img: portfolioImage, title: 'Scented candles' },
-    { img: portfolioImage, title: 'Scented candles' },
-    { img: portfolioImage, title: 'Scented candles' },
-    { img: portfolioImage, title: 'Scented candles' },
-    { img: portfolioImage, title: 'Scented candles' },
-  ];
+const ProfileWork = ({ searchedUser }) => {
+  const [forSale, setForSale] = useState(true);
+  const { user } = useUsers();
 
-  const dataAll = [
-    {
-      productId: 1,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'Innocence',
-      name: 'Mariam Said',
-      description: 'Oil on canvas',
-      year: 2008,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 1,
-      forSale: true,
-    },
-    {
-      productId: 2,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'Wallowing Breeze',
-      name: 'Tariq Ahmed',
-      description: 'Oil on canvas',
-      year: 2008,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 1,
-      forSale: false,
-    },
-    {
-      productId: 3,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'J Resistance',
-      name: 'Fatima Abbas',
-      description: 'Gouache on paper',
-      year: 2018,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 2,
-      forSale: false,
-    },
-    {
-      productId: 4,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'Warm Basket',
-      name: 'Nadia Salem',
-      description: 'Acrylic on wood',
-      year: 2014,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 3,
-      forSale: true,
-    },
-    {
-      productId: 5,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'The Vonnegut',
-      name: 'Nadia Salem',
-      description: 'Oil on canvas',
-      year: 2018,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 3,
-      forSale: false,
-    },
-  ];
+  const { products } = useUsers();
+
+  const artistForSale = products.filter(
+    (item) => item.forSale === true && item.artistId === searchedUser.id,
+  );
+  const artistPortfolio = products.filter(
+    (item) => item.forSale === false && item.artistId === searchedUser.id,
+  );
+
+  function handleForSale(e) {
+    e.preventDefault();
+    setForSale(true);
+  }
+
+  function handlePortfolio(e) {
+    e.preventDefault();
+    setForSale(false);
+  }
 
   return (
     <section className={styles.work}>
       <div className={styles.work__filter}>
-        <button className={styles.work__filter__btn}>For Sale</button>
         <button
-          className={`${styles.work__filter__btn} ${styles.work__filter__btnActive}`}>
+          className={`${styles.work__filter__btn} ${
+            forSale && styles.work__filter__btnActive
+          }`}
+          onClick={(e) => handleForSale(e)}>
+          For Sale
+        </button>
+        <button
+          className={`${styles.work__filter__btn} ${
+            !forSale && styles.work__filter__btnActive
+          }`}
+          onClick={(e) => handlePortfolio(e)}>
           Portfolio
         </button>
       </div>
+      {searchedUser.id === user.id && (
+        <Link className={styles.new} to={'/new'}>
+          +
+        </Link>
+      )}
 
       <div className={styles.work__images}>
-        {data.map((item, index) => (
-          <div className={styles.work__images__product}>
-            <img src={item.img} alt="" />
-            <p>{item.title}</p>
-          </div>
-        ))}
+        {forSale
+          ? artistForSale.length === 0
+            ? searchedUser.id === user.id
+              ? 'You dont have anything to sell yet Add now!'
+              : `${searchedUser.name} doesnt have anything to sell yet`
+            : artistForSale.map((item, index) => (
+                <Art
+                  item={item}
+                  index={index}
+                  rating={true}
+                  key={item.productId}
+                />
+              ))
+          : ''}
+
+        {!forSale
+          ? artistPortfolio.length === 0
+            ? searchedUser.id === user.id
+              ? 'You dont have anything in your portfolio yet Add now!'
+              : `${searchedUser.name} doent have anything in portfolio yet`
+            : artistPortfolio.map((item, index) => (
+                <Art item={item} index={index} rating={true} key={index} />
+              ))
+          : ''}
       </div>
     </section>
   );

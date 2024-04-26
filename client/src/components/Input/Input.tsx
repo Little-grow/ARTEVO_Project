@@ -4,8 +4,15 @@ import styles from './Input.module.css';
 const Input = (props) => {
   const [showToggle, setShowToggle] = useState(false);
 
-  const { inputLabel, inputType, toggle, constraints, anotherPage, name } =
-    props;
+  const {
+    inputLabel,
+    inputType,
+    toggle,
+    constraints,
+    anotherPage,
+    name,
+    value,
+  } = props;
 
   function handleKeyDown(event) {
     console.log(event.key);
@@ -26,7 +33,6 @@ const Input = (props) => {
             className={styles.toggleCheck}
             onChange={(e) => setShowToggle(e.target.checked)}
             checked={showToggle}
-            name="name"
           />
 
           <div className={styles.toggleLine}>
@@ -37,8 +43,7 @@ const Input = (props) => {
                 tabIndex={0}
                 role="checkbox"
                 aria-checked={showToggle ? 'false' : 'true'}
-                onKeyDown={handleKeyDown}
-              >
+                onKeyDown={handleKeyDown}>
                 {toggle.toggleIcon1}
                 <p>{toggle.toggleText1}</p>
               </label>
@@ -47,8 +52,7 @@ const Input = (props) => {
                 tabIndex={0}
                 role="checkbox"
                 aria-checked={showToggle ? 'true' : 'false'}
-                onKeyDown={handleKeyDown}
-              >
+                onKeyDown={handleKeyDown}>
                 {toggle.toggleIcon2}
                 <p>{toggle.toggleText2}</p>
               </label>
@@ -67,6 +71,7 @@ const Input = (props) => {
               : toggle.toggleInput1
             : inputType
         }
+        defaultValue={toggle ? '' : value}
         id={styles.input}
         name={name}
       />
@@ -96,3 +101,4 @@ const Input = (props) => {
 };
 
 export default Input;
+

@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import styles from './Slider.module.css';
 import { NavLink } from 'react-router-dom';
 import { useUsers } from '../../Context/UserContext';
+import Stars from '../Stars/Stars';
 
-const Slider = ({ data, art }) => {
+const Slider = ({ art }) => {
   const [startIndex, setStartIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(4);
-  const { cart } = useUsers();
+  const { products } = useUsers();
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,7 +28,7 @@ const Slider = ({ data, art }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  const dataLength = data.length;
+  const dataLength = products.length;
 
   const handlePrev = () => {
     setStartIndex((index) => (index - 1 + dataLength) % dataLength);
@@ -42,25 +43,23 @@ const Slider = ({ data, art }) => {
       <div className={styles.sliderContainer__slider}>
         <button
           className={styles.sliderContainer__slider__previous}
-          onClick={handlePrev}
-        >
+          onClick={handlePrev}>
           <svg
             width="8"
             height="14"
             viewBox="0 0 8 14"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            xmlns="http://www.w3.org/2000/svg">
             <path d="M7 1L1 7L7 13" stroke="#222222" />
           </svg>
         </button>
         <div className={styles.sliderContainer__slider__items}>
           {startIndex + itemsToShow <= dataLength
-            ? data
+            ? products
                 .slice(startIndex, startIndex + itemsToShow)
                 .map((item, index) => (
                   <>
-                    {art && <Art item={item} index={index} />}
+                    {art && <Art item={item} index={index} key={index} />}
                     {!art && (
                       <div key={index} className="item">
                         {item}
@@ -69,8 +68,8 @@ const Slider = ({ data, art }) => {
                   </>
                 ))
             : [
-                ...data.slice(startIndex),
-                ...data.slice(0, startIndex + itemsToShow - dataLength),
+                ...products.slice(startIndex),
+                ...products.slice(0, startIndex + itemsToShow - dataLength),
               ].map((item, index) => (
                 <>
                   {art && <Art item={item} index={index} />}
@@ -85,15 +84,13 @@ const Slider = ({ data, art }) => {
 
         <button
           className={styles.sliderContainer__slider__next}
-          onClick={handleNext}
-        >
+          onClick={handleNext}>
           <svg
             width="8"
             height="14"
             viewBox="0 0 8 14"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            xmlns="http://www.w3.org/2000/svg">
             <path d="M1 1L7 7L1 13" stroke="#222222" />
           </svg>
         </button>
@@ -104,8 +101,9 @@ const Slider = ({ data, art }) => {
 
 export default Slider;
 
-const Art = ({ item, index }) => {
-  const { image1, productName, productId, name, description, year } = item;
+export const Art = ({ item, index, rating }) => {
+  const { image1, productName, productId, name, description, year, stars } =
+    item;
   const { cart } = useUsers();
   const isInCart = cart.find(
     (cartItem) => cartItem.productId === item.productId,
@@ -116,8 +114,7 @@ const Art = ({ item, index }) => {
       <NavLink
         to={`/product/${productId}`}
         className={`${styles.sliderContainer__slider__items__item} ${styles.sliderContainer__slider__items__itemCart}`}
-        key={index}
-      >
+        key={index}>
         <img src={image1} alt={name} />
         <h3 className={styles.sliderContainer__slider__items__item__name}>
           {productName}
@@ -132,12 +129,39 @@ const Art = ({ item, index }) => {
     );
   }
 
+  if (rating) {
+    return (
+      <NavLink
+        to={`/product/${productId}`}
+        className={styles.sliderContainer__slider__items__item}
+        key={index}>
+        <img src={image1} alt={name} />
+        <div className={styles.sliderContainer__slider__items__item__container}>
+          <div>
+            <h3 className={styles.sliderContainer__slider__items__item__name}>
+              {productName}
+            </h3>
+            <p className={styles.sliderContainer__slider__items__item__author}>
+              {name}
+            </p>
+            <p
+              className={
+                styles.sliderContainer__slider__items__item__description
+              }>
+              {description}, {year}
+            </p>
+          </div>
+          <Stars rating={stars} />
+        </div>
+      </NavLink>
+    );
+  }
+
   return (
     <NavLink
       to={`/product/${productId}`}
       className={styles.sliderContainer__slider__items__item}
-      key={index}
-    >
+      key={index}>
       <img src={image1} alt={name} />
       <h3 className={styles.sliderContainer__slider__items__item__name}>
         {productName}
@@ -151,3 +175,4 @@ const Art = ({ item, index }) => {
     </NavLink>
   );
 };
+

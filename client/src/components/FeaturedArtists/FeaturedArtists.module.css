@@ -60,6 +60,9 @@
   flex: 1;
   padding-right: 16px;
 }
+.artists__artist img {
+  height: 80px;
+}
 
 .artists__artist__name {
   display: flex;

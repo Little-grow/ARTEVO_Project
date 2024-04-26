@@ -14,8 +14,6 @@ const Profile = ({ search }) => {
 
   const { users, user, uuid, setUser } = useUsers();
 
-  console.log(user);
-
   const searchedUser = search
     ? users.find((existing) => existing.id === Number(profileId))
     : user;
@@ -33,12 +31,9 @@ const Profile = ({ search }) => {
 
   useEffect(() => {
     if (user.id === searchedUser.id) {
-      console.log(user);
-      console.log(searchedUser);
-      navigate('/profile ');
-    } else {
-      console.log(user);
-      console.log(searchedUser);
+      navigate('/profile', {
+        replace: true,
+      });
     }
   }, []);
 
@@ -51,7 +46,7 @@ const Profile = ({ search }) => {
             setEditProfile={setEditProfile}
             searchedUser={searchedUser}
           />
-          <ProfileWork />
+          <ProfileWork searchedUser={searchedUser} />
         </div>
         {editProfile && <EditProfile setEditProfile={setEditProfile} />}
       </section>
@@ -60,3 +55,4 @@ const Profile = ({ search }) => {
 };
 
 export default Profile;
+

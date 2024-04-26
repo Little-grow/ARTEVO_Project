@@ -112,9 +112,11 @@ input[type='checkbox']#menu {
 }
 
 :global(.active) .profile,
-:global(.active) .cart {
+:global(.active) .cart,
+:global(.active) .search {
   fill: black;
   path {
     stroke: black;
   }
 }
+

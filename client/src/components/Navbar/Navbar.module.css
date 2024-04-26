@@ -117,10 +117,12 @@ input[type=checkbox]#menu {
 }
 
 :global(.active) .profile,
-:global(.active) .cart {
+:global(.active) .cart,
+:global(.active) .search {
   fill: black;
 }
 :global(.active) .profile path,
-:global(.active) .cart path {
+:global(.active) .cart path,
+:global(.active) .search path {
   stroke: black;
 }/*# sourceMappingURL=Navbar.module.css.map */

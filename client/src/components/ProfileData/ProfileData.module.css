@@ -43,6 +43,16 @@
 
 .profileData__image {
   position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+.profileData__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
 }
 
 .profileData__image__edit {

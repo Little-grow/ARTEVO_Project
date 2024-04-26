@@ -1,0 +1,53 @@
+@import '../../Container';
+@import '../../GlobalVariables';
+
+.container {
+  @extend .container;
+  padding-top: $sectionPadding;
+  padding-bottom: $sectionPadding;
+  font-family: 'Inter', 'sans-serif';
+}
+
+.categories {
+  display: flex;
+  gap: 8px;
+}
+
+.category {
+  border: none;
+  background-color: #dddddd;
+  padding: 12px 24px;
+  border-radius: 15px;
+}
+
+.categoryActive {
+  background-color: black;
+  color: white;
+}
+
+.searchBar {
+  width: 100%;
+  padding: 16px 24px;
+  outline: none;
+  margin-bottom: 32px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.searchBar:active {
+  outline: none;
+}
+
+.searchBar:focus {
+  outline: none;
+}
+
+.results {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  gap: 32px;
+}
+

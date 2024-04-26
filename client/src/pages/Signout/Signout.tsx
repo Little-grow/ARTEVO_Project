@@ -1,17 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import { useUsers } from '../../Context/UserContext';
 import { useEffect } from 'react';
+import { useUsers } from '../../Context/UserContext';
 
 const Signout = () => {
   const navigate = useNavigate();
-  const { setUuid } = useUsers();
+  const { setUser, setUuid } = useUsers();
 
   useEffect(() => {
     localStorage.setItem('uuid', '');
     setUuid('');
+    setUser(null);
+    navigate('/signin');
   }, []);
-
-  return navigate('/signin');
 };
 
 export default Signout;
+
