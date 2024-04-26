@@ -1,14 +1,11 @@
 import Navbar from '../../components/Navbar/Navbar';
 import styles from './Product.module.css';
 
-import imageOne from '../../../public/images/product/1.png';
-import imageTwo from '../../../public/images/product/2.png';
-import imageThree from '../../../public/images/product/3.png';
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useUsers } from '../../Context/UserContext';
 
-const Product = ({ renderTime }) => {
+const Product = () => {
   function handleToggleCart(e, setCart) {
     e.preventDefault();
 
@@ -22,99 +19,13 @@ const Product = ({ renderTime }) => {
     // navigate(-1);
   }
 
-  const { productId } = useParams();
+  const { user, products } = useUsers();
 
-  const dataAll = [
-    {
-      productId: 1,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'Innocence',
-      name: 'Mariam Said',
-      description: 'Oil on canvas',
-      year: 2008,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 1,
-      forSale: true,
-    },
-    {
-      productId: 2,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'Wallowing Breeze',
-      name: 'Tariq Ahmed',
-      description: 'Oil on canvas',
-      year: 2008,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 1,
-      forSale: false,
-    },
-    {
-      productId: 3,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'J Resistance',
-      name: 'Fatima Abbas',
-      description: 'Gouache on paper',
-      year: 2018,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 2,
-      forSale: false,
-    },
-    {
-      productId: 4,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'Warm Basket',
-      name: 'Nadia Salem',
-      description: 'Acrylic on wood',
-      year: 2014,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 3,
-      forSale: true,
-    },
-    {
-      productId: 5,
-      image1: imageOne,
-      image2: imageTwo,
-      image3: imageThree,
-      productName: 'The Vonnegut',
-      name: 'Nadia Salem',
-      description: 'Oil on canvas',
-      year: 2018,
-      reviews: 4100,
-      price: 650,
-      stars: 5,
-      longDescription:
-        'Dynamic and elusive abstraction and texture. Plays between the lines of chaos and serenity. Perfect fit for modern and contemporary styled interiors.',
-      artistId: 3,
-      forSale: false,
-    },
-  ];
+  const { productId } = useParams();
 
   const navigate = useNavigate();
 
-  const data = dataAll.filter(
+  const data = products.filter(
     (data) => data.productId === Number(productId),
   )[0];
 
@@ -244,67 +155,78 @@ const Product = ({ renderTime }) => {
               <p className={styles.product__textDiv__extendedDescription}>
                 {data.longDescription}
               </p>
-              <hr />
-              <div className={styles.product__textDiv__details}>
-                <p className={styles.product__textDiv__details__price}>
-                  {data.price} EGP
-                </p>
-                <div>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <ellipse
-                      cx="8"
-                      cy="8.24793"
-                      rx="4"
-                      ry="5.58125"
-                      stroke="#65635F"
-                    />
-                    <circle cx="8" cy="6.33331" r="1" stroke="#65635F" />
-                  </svg>
-                  <p>Ships from 6th October, Cairo, Egypt</p>
-                </div>
-                <div>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <rect
-                      x="1.45557"
-                      y="3.8222"
-                      width="8.71111"
-                      height="6.84444"
-                      stroke="#65635F"
-                    />
-                    <path
-                      d="M4.5 5.68887L7.16667 5.66664"
-                      stroke="#65635F"
-                      strokeLinecap="square"
-                    />
-                    <rect
-                      x="0.833252"
-                      y="1.33331"
-                      width="9.95556"
-                      height="2.48889"
-                      stroke="#65635F"
-                    />
-                  </svg>
-                  <p>Estimated to ship in 3 - 7 days within Egypt</p>
-                </div>
-                <button
-                  className={styles.product__textDiv__details__add}
-                  onClick={(e) => handleToggleCart(e, setCart)}>
-                  {isInCart ? 'Remove from Cart' : 'Add to Cart'}
-                </button>
-                <p className={styles.product__textDiv__details__terms}>
-                  Taxes and shipping fees will apply upon checkout
-                </p>
-              </div>
+
+              {user.id === data.artistId ? (
+                <Link to="/profile" className={styles.view}>
+                  View Your Work
+                </Link>
+              ) : data.forSale === false ? (
+                <p>This Item is not for sale</p>
+              ) : (
+                <>
+                  <hr />
+                  <div className={styles.product__textDiv__details}>
+                    <p className={styles.product__textDiv__details__price}>
+                      {data.price} EGP
+                    </p>
+                    <div>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <ellipse
+                          cx="8"
+                          cy="8.24793"
+                          rx="4"
+                          ry="5.58125"
+                          stroke="#65635F"
+                        />
+                        <circle cx="8" cy="6.33331" r="1" stroke="#65635F" />
+                      </svg>
+                      <p>Ships from 6th October, Cairo, Egypt</p>
+                    </div>
+                    <div>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <rect
+                          x="1.45557"
+                          y="3.8222"
+                          width="8.71111"
+                          height="6.84444"
+                          stroke="#65635F"
+                        />
+                        <path
+                          d="M4.5 5.68887L7.16667 5.66664"
+                          stroke="#65635F"
+                          strokeLinecap="square"
+                        />
+                        <rect
+                          x="0.833252"
+                          y="1.33331"
+                          width="9.95556"
+                          height="2.48889"
+                          stroke="#65635F"
+                        />
+                      </svg>
+                      <p>Estimated to ship in 3 - 7 days within Egypt</p>
+                    </div>
+                    <button
+                      className={styles.product__textDiv__details__add}
+                      onClick={(e) => handleToggleCart(e, setCart)}>
+                      {isInCart ? 'Remove from Cart' : 'Add to Cart'}
+                    </button>
+                    <p className={styles.product__textDiv__details__terms}>
+                      Taxes and shipping fees will apply upon checkout
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </section>

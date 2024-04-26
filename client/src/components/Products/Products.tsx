@@ -24,9 +24,9 @@ const Products = ({ data, pageMaximumContent, pageNumber }) => {
                 {/* Render different content based on whether the item is in the cart */}
                 {isInCart ? (
                   <NavLink
+                    key={index}
                     to={`/product/${item.productId}`}
-                    className={`${styles.productsDiv__product} ${styles.productsDiv__productCart}`}
-                  >
+                    className={`${styles.productsDiv__product} ${styles.productsDiv__productCart}`}>
                     <img
                       src={item.image1}
                       alt={item.productName}
@@ -42,18 +42,21 @@ const Products = ({ data, pageMaximumContent, pageNumber }) => {
                       {/* Assuming Stars component exists */}
                       <Stars />
                     </div>
-                    <p className={styles.productsDiv__product__reviews}>
-                      {item.reviews}) Customer Reviews
-                    </p>
-                    <p className={styles.productsDiv__product__price}>
-                      {item.price} EGP
-                    </p>
+                    {item.forSale === true && (
+                      <>
+                        <p className={styles.productsDiv__product__reviews}>
+                          {item.reviews}) Customer Reviews
+                        </p>
+                        <p className={styles.productsDiv__product__price}>
+                          {item.price} EGP
+                        </p>{' '}
+                      </>
+                    )}
                   </NavLink>
                 ) : (
                   <NavLink
                     to={`/product/${item.productId}`}
-                    className={styles.productsDiv__product}
-                  >
+                    className={styles.productsDiv__product}>
                     <img
                       src={item.image1}
                       alt={item.productName}
@@ -69,12 +72,16 @@ const Products = ({ data, pageMaximumContent, pageNumber }) => {
                       {/* Assuming Stars component exists */}
                       <Stars />
                     </div>
-                    <p className={styles.productsDiv__product__reviews}>
-                      {item.reviews}) Customer Reviews
-                    </p>
-                    <p className={styles.productsDiv__product__price}>
-                      {item.price} EGP
-                    </p>
+                    {item.forSale === true && (
+                      <>
+                        <p className={styles.productsDiv__product__reviews}>
+                          {item.reviews}) Customer Reviews
+                        </p>
+                        <p className={styles.productsDiv__product__price}>
+                          {item.price} EGP
+                        </p>
+                      </>
+                    )}
                   </NavLink>
                 )}
               </>
@@ -87,3 +94,4 @@ const Products = ({ data, pageMaximumContent, pageNumber }) => {
 };
 
 export default Products;
+

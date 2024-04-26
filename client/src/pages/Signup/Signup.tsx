@@ -4,7 +4,6 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import FormHeader from '../../components/FormHeader/FormHeader';
 import SignImage from '../../components/SignImage/SignImage';
-import RenderTimeWrapper from '../../RenderTimeWrapper';
 import { useUsers } from '../../Context/UserContext';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
@@ -19,8 +18,7 @@ const Signup = ({ renderTime }) => {
         height="24"
         viewBox="0 0 25 24"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
         <path
           d="M20.0194 4.88129L19.2835 4.14535C19.0755 3.93736 18.6915 3.96937 18.4515 4.25731L15.8913 6.80128C14.7392 6.30533 13.4754 6.06533 12.1473 6.06533C8.19519 6.08127 4.77141 8.38524 3.12329 11.6974C3.02726 11.9054 3.02726 12.1614 3.12329 12.3374C3.89122 13.9054 5.04329 15.2014 6.4833 16.1774L4.3873 18.3053C4.1473 18.5453 4.11529 18.9293 4.27534 19.1373L5.01128 19.8733C5.21928 20.0812 5.60326 20.0492 5.84326 19.7613L19.8912 5.7134C20.1952 5.47354 20.2272 5.08958 20.0192 4.88156L20.0194 4.88129ZM12.9953 9.71318C12.7233 9.64916 12.4353 9.5692 12.1633 9.5692C10.8033 9.5692 9.71538 10.6572 9.71538 12.0171C9.71538 12.2891 9.7794 12.5771 9.85935 12.8491L8.78724 13.9051C8.46728 13.3452 8.2913 12.7211 8.2913 12.0172C8.2913 9.88919 10.0033 8.17717 12.1313 8.17717C12.8354 8.17717 13.4593 8.35315 14.0193 8.67311L12.9953 9.71318Z"
           fill="#666666"
@@ -39,8 +37,7 @@ const Signup = ({ renderTime }) => {
         height="24"
         viewBox="0 0 24 24"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -125,9 +122,7 @@ const Signup = ({ renderTime }) => {
   return (
     <>
       <header>
-        <RenderTimeWrapper>
-          <Navbar logoOnly={true} />
-        </RenderTimeWrapper>
+        <Navbar logoOnly={true} />
       </header>
       <main>
         <div className={styles.container}>
@@ -158,6 +153,7 @@ const Signup = ({ renderTime }) => {
               onChange={handleFileChange}
               accept=".jpg, .jpeg, .png"
               id="image"
+              className="fileOut"
             />
 
             <div className={styles.terms}>
@@ -178,3 +174,4 @@ const Signup = ({ renderTime }) => {
 };
 
 export default Signup;
+

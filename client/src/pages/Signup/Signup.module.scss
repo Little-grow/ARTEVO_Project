@@ -73,6 +73,7 @@ input:focus {
   opacity: 0.4;
 }
 
-input[type='file'] {
+:global(.fileOut) {
   display: none;
 }
+

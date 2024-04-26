@@ -13,6 +13,8 @@ import NewProject from './pages/NewProject/NewProject';
 import UserProvider, { useUsers } from './Context/UserContext';
 import Signout from './pages/Signout/Signout';
 import Favourites from './pages/Favourites/Favourites';
+import Artists from './pages/Artists/Artists';
+import Search from './pages/Search/Search';
 
 function App() {
   const { uuid, user } = useUsers();
@@ -56,6 +58,14 @@ function App() {
           path="/artist/:profileId"
           element={user ? <Profile search={true} /> : <Navigate to="/signin" />}
         />
+        <Route
+          path="/artists"
+          element={user ? <Artists /> : <Navigate to="/signin" />}
+        />
+        <Route
+          path="/search"
+          element={user ? <Search /> : <Navigate to="/signin" />}
+        />
 
         <Route
           path="/signout"
@@ -72,3 +82,4 @@ function App() {
 }
 
 export default App;
+

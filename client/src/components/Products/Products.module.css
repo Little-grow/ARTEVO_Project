@@ -49,6 +49,7 @@
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  padding-bottom: 32px;
 }
 
 .productsDiv__productCart::after {
@@ -100,5 +101,4 @@
 .productsDiv__product__price {
   color: #65635f;
   padding: 0 18px;
-  margin-bottom: 32px;
 }/*# sourceMappingURL=Products.module.css.map */

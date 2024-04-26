@@ -102,6 +102,6 @@ input:focus {
   opacity: 0.4;
 }
 
-input[type=file] {
+:global(.fileOut) {
   display: none;
 }/*# sourceMappingURL=Signup.module.css.map */

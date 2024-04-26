@@ -3,7 +3,6 @@ import { useUsers } from '../../Context/UserContext';
 import Products from '../../components/Products/Products';
 import PagesSlider from '../../components/PagesSlider/PagesSlider';
 import { useSearchParams } from 'react-router-dom';
-import RenderTimeWrapper from '../../RenderTimeWrapper';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from './Favourites.module.css';
 
@@ -24,9 +23,7 @@ const Favourites = () => {
 
   return (
     <>
-      <RenderTimeWrapper>
-        <Navbar logoOnly={false} />
-      </RenderTimeWrapper>
+      <Navbar logoOnly={false} />
       <main>
         {favourites.length === 0 ? (
           <div className={styles.container}>
@@ -52,3 +49,4 @@ const Favourites = () => {
 };
 
 export default Favourites;
+

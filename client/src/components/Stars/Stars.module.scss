@@ -27,6 +27,8 @@
 
 .star {
   @extend .star-five;
-  background-color: white;
-  border: 1px solid black;
+  width: 9px;
+  height: 9px;
+  background-color: #dddddd;
 }
+

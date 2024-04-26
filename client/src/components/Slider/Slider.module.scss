@@ -53,6 +53,13 @@
   }
 }
 
+.sliderContainer__slider__items__item__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 32px;
+}
+
 .sliderContainer__slider__items__itemCart::after {
   content: 'In Cart';
   color: white;
@@ -86,3 +93,4 @@
   font-style: italic;
   padding: 0 18px 32px;
 }
+
