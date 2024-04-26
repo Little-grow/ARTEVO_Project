@@ -4,8 +4,7 @@ import styles from './FeaturedArtists.module.css';
 
 const FeaturedArtists = () => {
   const { users } = useUsers();
-  const top3Artist = users
-    .sort((a, b) => b.followersArray.length - a.followersArray.length)
+  const top3Artist = users.sort((a, b) => b.followersArray?.length - a.followersArray?.length)
     .slice(0, 3);
   return (
     <section className={styles.featuredArtists}>
