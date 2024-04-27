@@ -14,11 +14,9 @@ namespace api.Controllers.Users
     public class ArtistsController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ArtistsController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
+        public ArtistsController(AppDbContext context)
         {
-            _webHostEnvironment = webHostEnvironment;
             _context = context;
         }
 
@@ -85,13 +83,13 @@ namespace api.Controllers.Users
         //}
 
         [HttpGet("AllArtists")]
-        public async Task<IActionResult> AllArtists()
+        public IActionResult AllArtists()
         {
-            var artists = await _context.Artists.ToListAsync();
+            var artists = _context.Artists.ToList();
             return artists is null ? NotFound() : Ok(artists);
         }
-            
 
+        [HttpPost("FollowArtist")]
         public async Task<IActionResult> FollowArtist(int ArtistId, int UserId)
         {
             // implement this function 
@@ -109,9 +107,9 @@ namespace api.Controllers.Users
                 return NotFound();
             }
 
-            
+
             artist.FollowersArray![++artist.Followers] = user.Id;
-            user.FollowingArray![++user.Following] = artist.Id; 
+            user.FollowingArray![++user.Following] = artist.Id;
 
             return Ok();
         }

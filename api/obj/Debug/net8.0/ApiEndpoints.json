@@ -11,6 +11,27 @@
   },
   {
     "ContainingType": "api.Controllers.Users.ArtistsController",
+    "Method": "FollowArtist",
+    "RelativePath": "api/Artists/FollowArtist",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ArtistId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "api.Controllers.Users.ArtistsController",
     "Method": "ViewProfile",
     "RelativePath": "api/Artists/profile",
     "HttpMethod": "GET",
