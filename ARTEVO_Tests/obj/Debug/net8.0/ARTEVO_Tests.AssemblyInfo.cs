@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ARTEVO_Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e86c0dbf54f1350e283c4ce9827d64dcd9b11dcd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3273bf698391041ee72d3e3449ba85909ad4f707")]
 [assembly: System.Reflection.AssemblyProductAttribute("ARTEVO_Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ARTEVO_Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

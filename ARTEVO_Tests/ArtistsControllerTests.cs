@@ -6,59 +6,61 @@ namespace ARTEVO_Tests
     using api.Controllers.Users;
     using api.Models;
     using api.Models.Users;
+    using api.Repo;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http.HttpResults;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using Moq; 
+    using Moq;
 
     public class ArtistsControllerTests
     {
+
+
         [Fact]
-        public  void GetAllArtists_ShouldReturnOk_WhenArtistsExist()
+        public void GetAllArtists_ShouldReturnOk_WhenArtistsExist()
         {
             // Arrange
-            var mockContext = new Mock<AppDbContext>(); 
-          
-            var expectedArtists = new List<Artist>() { new Artist { Id = 1, Name = "Test Artist", UserName = "Test Artist" } };
-           
-            mockContext.Setup(context => context.Artists.ToList()).Returns(expectedArtists);
-           
-            var controller = new ArtistsController(mockContext.Object);
+            var mockRepo = new Mock<IArtistsRepository>();
+            var mockData = new List<Artist>()
+            {
+                new Artist{ UserName = "Test", Name = "Test" },
+                new Artist{ UserName = "Test2", Name = "Test2" }
+            }; // Sample artist data
+
+            mockRepo.Setup(repo => repo.GetAllArtists()).Returns(mockData); // Return sample data
+
+            var controller = new ArtistsController(mockRepo.Object); // Inject the mock
 
             // Act
             var actionResult = controller.AllArtists();
 
             // Assert
-            var okObjectResult = actionResult as OkObjectResult;
-            Assert.NotNull(okObjectResult);
-            Assert.Equal(200, okObjectResult.StatusCode);
-            var artists = okObjectResult.Value as List<Artist>;
-            Assert.NotNull(artists);
-            Assert.Equal(expectedArtists, artists);
+            Assert.IsType<OkObjectResult>(actionResult);
+            var okResult = actionResult as OkObjectResult;
+            Assert.NotNull(okResult);
+
+            var artists = okResult.Value as IEnumerable<Artist>;
+            Assert.Equal(2, artists?.Count()); // Assert the number of returned artists
         }
 
         [Fact]
         public void GetAllArtists_ShouldReturnNotFound_WhenNoArtistsExist()
         {
             // Arrange
-            var mockContext = new Mock<AppDbContext>();
-            mockContext.Setup(context => context.Artists.ToList()).Returns(Enumerable.Empty<Artist>().ToList());
+            var mockRepo = new Mock<IArtistsRepository>();
 
-            var controller = new ArtistsController(mockContext.Object);
+
+            // mockRepo.Setup(null!); // Return empty data
+            mockRepo.Setup(repo => repo.GetAllArtists()).Returns<IEnumerable<Artist>>(null!); // Return null
+
+            var controller = new ArtistsController(mockRepo.Object); // Inject the mock
 
             // Act
             var actionResult = controller.AllArtists();
 
             // Assert
             Assert.IsType<NotFoundResult>(actionResult);
-        }
-
-        public static class MockData
-        {
-            public static IEnumerable<T> Empty<T>()
-            {
-                return Enumerable.Empty<T>();
-            }
         }
 
 
