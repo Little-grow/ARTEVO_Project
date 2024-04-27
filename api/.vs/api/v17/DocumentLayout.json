@@ -1,10 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\art\\api\\",
+  "WorkspaceRootPath": "E:\\ARTEVO\\api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{707C94D0-9CB4-4BC5-BCAB-BB1B49E73DDB}|api.csproj|e:\\art\\api\\models\\carts\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{707C94D0-9CB4-4BC5-BCAB-BB1B49E73DDB}|api.csproj|solutionrelative:models\\carts\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DF5B996-8A71-4515-99E6-32F54366DB8C}|..\\ARTEVO_Tests\\ARTEVO_Tests.csproj|e:\\artevo\\artevo_tests\\artistscontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1424B3F3-200E-4B8C-A7FF-317B7DFEEF69}|api.csproj|e:\\artevo\\api\\controllers\\users\\artistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1424B3F3-200E-4B8C-A7FF-317B7DFEEF69}|api.csproj|solutionrelative:controllers\\users\\artistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1424B3F3-200E-4B8C-A7FF-317B7DFEEF69}|api.csproj|e:\\artevo\\api\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1424B3F3-200E-4B8C-A7FF-317B7DFEEF69}|api.csproj|solutionrelative:models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1424B3F3-200E-4B8C-A7FF-317B7DFEEF69}|api.csproj|e:\\artevo\\api\\models\\users\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1424B3F3-200E-4B8C-A7FF-317B7DFEEF69}|api.csproj|solutionrelative:models\\users\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +25,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 457,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,15 +53,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Cart.cs",
-              "DocumentMoniker": "E:\\art\\api\\Models\\Carts\\Cart.cs",
-              "RelativeDocumentMoniker": "Models\\Carts\\Cart.cs",
-              "ToolTip": "E:\\art\\api\\Models\\Carts\\Cart.cs",
-              "RelativeToolTip": "Models\\Carts\\Cart.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAGAAAA",
+              "DocumentIndex": 2,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "E:\\ARTEVO\\api\\Models\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Models\\AppDbContext.cs",
+              "ToolTip": "E:\\ARTEVO\\api\\Models\\AppDbContext.cs",
+              "RelativeToolTip": "Models\\AppDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T16:18:34.726Z",
+              "WhenOpened": "2024-04-27T01:30:39.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Artist.cs",
+              "DocumentMoniker": "E:\\ARTEVO\\api\\Models\\Users\\Artist.cs",
+              "RelativeDocumentMoniker": "Models\\Users\\Artist.cs",
+              "ToolTip": "E:\\ARTEVO\\api\\Models\\Users\\Artist.cs",
+              "RelativeToolTip": "Models\\Users\\Artist.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T01:30:36.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ArtistsController.cs",
+              "DocumentMoniker": "E:\\ARTEVO\\api\\Controllers\\Users\\ArtistsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Users\\ArtistsController.cs",
+              "ToolTip": "E:\\ARTEVO\\api\\Controllers\\Users\\ArtistsController.cs",
+              "RelativeToolTip": "Controllers\\Users\\ArtistsController.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAFUAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T01:28:01.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ArtistsControllerTests.cs",
+              "DocumentMoniker": "E:\\ARTEVO\\ARTEVO_Tests\\ArtistsControllerTests.cs",
+              "RelativeDocumentMoniker": "..\\ARTEVO_Tests\\ArtistsControllerTests.cs",
+              "ToolTip": "E:\\ARTEVO\\ARTEVO_Tests\\ArtistsControllerTests.cs",
+              "RelativeToolTip": "..\\ARTEVO_Tests\\ArtistsControllerTests.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAAwBwAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T01:23:02.98Z",
               "EditorCaption": ""
             }
           ]
