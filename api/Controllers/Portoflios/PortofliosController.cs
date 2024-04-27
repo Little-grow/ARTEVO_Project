@@ -33,7 +33,6 @@ namespace api.Controllers.Portoflios
             _context = context;
         }
 
-        // the most confusing function in linking with front end
         [HttpGet("portfolio")]
         public async Task<IActionResult> GetPortfolio(int ArtistId)
         {

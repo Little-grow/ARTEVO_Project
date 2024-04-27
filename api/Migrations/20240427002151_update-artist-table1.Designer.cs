@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Models;
 
@@ -11,9 +12,11 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240427002151_update-artist-table1")]
+    partial class updateartisttable1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +57,7 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtistId")
-                        .IsUnique();
+                    b.HasIndex("ArtistId");
 
                     b.ToTable("Portoflios");
                 });
@@ -196,8 +198,8 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Portoflios.Portoflio", b =>
                 {
                     b.HasOne("api.Models.Users.Artist", "Artist")
-                        .WithOne("Portoflio")
-                        .HasForeignKey("api.Models.Portoflios.Portoflio", "ArtistId")
+                        .WithMany()
+                        .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -231,11 +233,6 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Portoflios.Portoflio", b =>
                 {
                     b.Navigation("Files");
-                });
-
-            modelBuilder.Entity("api.Models.Users.Artist", b =>
-                {
-                    b.Navigation("Portoflio");
                 });
 #pragma warning restore 612, 618
         }

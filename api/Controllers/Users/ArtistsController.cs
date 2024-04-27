@@ -90,5 +90,30 @@ namespace api.Controllers.Users
             var artists = await _context.Artists.ToListAsync();
             return artists is null ? NotFound() : Ok(artists);
         }
+            
+
+        public async Task<IActionResult> FollowArtist(int ArtistId, int UserId)
+        {
+            // implement this function 
+            var artist = await _context.Artists.FirstOrDefaultAsync(a => a.Id == ArtistId);
+
+            if (artist is null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Artists.FirstOrDefaultAsync(u => u.Id == UserId);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            
+            artist.FollowersArray![++artist.Followers] = user.Id;
+            user.FollowingArray![++user.Following] = artist.Id; 
+
+            return Ok();
+        }
     }
 }
