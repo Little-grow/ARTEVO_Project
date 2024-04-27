@@ -1,5 +1,6 @@
 using api.Models;
 using api.Models.Helpers;
+using api.Repo;
 using api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -61,7 +62,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 });
 
 builder.Services.AddScoped<IAuthService, AuthService>();
-
+builder.Services.AddScoped<IArtistsRepository, ArtistsRepository>();
 
 var app = builder.Build();
 

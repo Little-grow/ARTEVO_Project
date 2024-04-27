@@ -3,6 +3,7 @@ using api.Models;
 using api.Models.Dto.PortofliosDto;
 using api.Models.Dto.Users;
 using api.Models.Users;
+using api.Repo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,20 +14,17 @@ namespace api.Controllers.Users
     [ApiController]
     public class ArtistsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IArtistsRepository _repo;
 
-        public ArtistsController(AppDbContext context)
+        public ArtistsController(IArtistsRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         [HttpGet("profile")]
         public async Task<IActionResult> ViewProfile(int ArtistId)
         {
-            var artist = await _context.Artists
-                     //.Include(a => a.Portoflio)
-                     .FirstOrDefaultAsync(a => a.Id == ArtistId);
-
+            var artist = _repo.GetArtistById(ArtistId);
             if (artist is null)
             {
                 return NotFound();
@@ -38,8 +36,7 @@ namespace api.Controllers.Users
         [HttpPut("profile")]
         public async Task<IActionResult> EditProfile(int ArtistId, [FromBody] ArtistDto artistDto)
         {
-            var artist = await _context.Artists
-                .FirstOrDefaultAsync(a => a.Id == ArtistId);
+            var artist =await _repo.GetArtistById(ArtistId);
 
             if (artist is null)
             {
@@ -53,8 +50,7 @@ namespace api.Controllers.Users
             artist.Email = artistDto.Email;
             artist.PhoneNumber = artistDto.PhoneNumber;
 
-            _context.Artists.Update(artist);
-            await _context.SaveChangesAsync();
+            await _repo.UpdateArtistAsync(artist);
 
             return NoContent();
         }
@@ -85,22 +81,21 @@ namespace api.Controllers.Users
         [HttpGet("AllArtists")]
         public IActionResult AllArtists()
         {
-            var artists = _context.Artists.ToList();
+            var artists = _repo.GetAllArtists();
             return artists is null ? NotFound() : Ok(artists);
         }
 
         [HttpPost("FollowArtist")]
         public async Task<IActionResult> FollowArtist(int ArtistId, int UserId)
         {
-            // implement this function 
-            var artist = await _context.Artists.FirstOrDefaultAsync(a => a.Id == ArtistId);
+            var artist = await _repo.GetArtistById(ArtistId);
 
             if (artist is null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Artists.FirstOrDefaultAsync(u => u.Id == UserId);
+            var user = await _repo.GetArtistById(UserId);
 
             if (user is null)
             {
